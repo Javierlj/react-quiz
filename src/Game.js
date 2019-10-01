@@ -23,7 +23,7 @@ const Game = props => {
         return response.json();
       })
       .then(function(myJson) {
-        dispatch(initQuestions([myJson]));
+        dispatch(initQuestions(myJson));
       })
       .catch(error => console.log(error));
   }, []);

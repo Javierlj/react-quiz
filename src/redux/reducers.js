@@ -1,22 +1,21 @@
 import { combineReducers } from "redux";
-import { QUESTION_ANSWER, CHANGE_QUESTION } from "./actions";
+import { QUESTION_ANSWER, INIT_QUESTIONS, SUBMIT } from "./actions";
 
 function score(state = 0, action = {}) {
   switch (action.type) {
+    case SUBMIT:
+      return action.questions.filter(question => {
+        return question.answer === question.userAnswer;
+      }).length;
     default:
       return state;
   }
 }
 function finished(state = false, action = {}) {
   switch (action.type) {
-    default:
-      return state;
-  }
-}
-function currentQuestion(state = 0, action = {}) {
-  switch (action.type) {
-    case CHANGE_QUESTION:
-      return action.currentQuestion + 1;
+    case SUBMIT:
+      return true;
+
     default:
       return state;
   }
@@ -29,9 +28,14 @@ function questions(state = [], action = {}) {
         return {
           ...question,
           userAnswer:
-            action.payload.i === i ? action.payload.answer : question.userAnswer
+            action.payload.index === i
+              ? action.payload.answer
+              : question.userAnswer
         };
       });
+
+    case INIT_QUESTIONS:
+      return action.questions;
 
     default:
       return state;
@@ -41,16 +45,7 @@ function questions(state = [], action = {}) {
 const GlobalState = combineReducers({
   score,
   finished,
-  currentQuestion,
   questions
 });
 
-/*{export default (state = {}, action) => {
-  return {
-    score: score(state.score, action, state),
-    finished: finished(state.finished, action, state),
-    currentQuestion: currentQuestion(state.currentQuestion, action, state),
-    questions: questions(state.questions, action, state)
-  };
-};}*/
 export default GlobalState;

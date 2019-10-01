@@ -5,19 +5,17 @@ import { createStore } from "redux";
 import React, { Component } from "react";
 import App from "../App";
 
-import { questions } from "../assets/mock-data";
-
 export default class ReduxProvider extends Component {
   constructor(props) {
     super(props);
     this.initialState = {
       score: 0,
       finished: false,
-      currentQuestion: 0,
-      questions: [...questions]
+      questions: []
     };
     this.store = this.configureStore();
   }
+
   render() {
     return (
       <Provider store={this.store}>
@@ -28,6 +26,9 @@ export default class ReduxProvider extends Component {
     );
   }
   configureStore() {
-    return createStore(GlobalState, this.initialState);
+    const reduxDevTools =
+      window.__REDUX_DEVTOOLS_EXTENSION__ &&
+      window.__REDUX_DEVTOOLS_EXTENSION__();
+    return createStore(GlobalState, this.initialState, reduxDevTools);
   }
 }

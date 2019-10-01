@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { QUESTION_ANSWER } from "./actions";
+import { QUESTION_ANSWER, CHANGE_QUESTION } from "./actions";
 
 function score(state = 0, action = {}) {
   switch (action.type) {
@@ -15,6 +15,8 @@ function finished(state = false, action = {}) {
 }
 function currentQuestion(state = 0, action = {}) {
   switch (action.type) {
+    case CHANGE_QUESTION:
+      return action.currentQuestion + 1;
     default:
       return state;
   }
@@ -30,6 +32,7 @@ function questions(state = [], action = {}) {
             action.payload.i === i ? action.payload.answer : question.userAnswer
         };
       });
+
     default:
       return state;
   }
@@ -42,4 +45,12 @@ const GlobalState = combineReducers({
   questions
 });
 
+/*{export default (state = {}, action) => {
+  return {
+    score: score(state.score, action, state),
+    finished: finished(state.finished, action, state),
+    currentQuestion: currentQuestion(state.currentQuestion, action, state),
+    questions: questions(state.questions, action, state)
+  };
+};}*/
 export default GlobalState;

@@ -5,7 +5,12 @@ const Question = props => {
   const { question, onQuestionAnswer } = props;
   return (
     <div className="question">
-      <img src={question.attachment.url} width={"500px"} alt={""} />
+      <img
+        className="question_image"
+        src={question.attachment.url}
+        width={"500px"}
+        alt={""}
+      />
       <div>
         <p>{question.question}</p>
         <input

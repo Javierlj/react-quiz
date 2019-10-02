@@ -5,12 +5,7 @@ const Question = props => {
   const { question, onQuestionAnswer } = props;
   return (
     <div className="question">
-      <img
-        className="question_image"
-        src={question.attachment.url}
-        width={"500px"}
-        alt={""}
-      />
+      <img className="question_image" src={question.attachment.url} alt={""} />
       <div>
         <p>{question.question}</p>
         <input
@@ -18,9 +13,18 @@ const Question = props => {
           value={question.userAnswer || ""}
           onChange={e => onQuestionAnswer(e.target.value)}
         />
+
         {question.tips.map(tip => {
           return <p>{tip}</p>;
         })}
+      </div>
+      <div>
+        <img
+          className="question_author_photo"
+          src={question.author.photo.url}
+          alt={""}
+        />
+        <p className="question_author_name">{question.author.username}</p>
       </div>
     </div>
   );

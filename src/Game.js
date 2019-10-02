@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Carousel from "react-bootstrap/Carousel";
 import Question from "./components/Question/question";
-import { questionAnswer, initQuestions, submit } from "./redux/actions";
-import Button from "react-bootstrap/Button";
+import { questionAnswer, initQuestions } from "./redux/actions";
 import Toast from "./components/Toast";
+import SubmitButton from "./components/SubmitButton";
+import NavBar from "./components/NavBar";
 
 const Game = props => {
   const { dispatch, questions } = props;
@@ -31,9 +32,7 @@ const Game = props => {
     <p>No hay preguntas</p>
   ) : (
     <React.Fragment>
-      <nav className="navbar navbar-dark bg-dark">
-        <span className="navbar-brand ml-xl-5">QuizGame</span>
-      </nav>
+      <NavBar />
       <Carousel
         activeIndex={index}
         interval={null}
@@ -52,11 +51,7 @@ const Game = props => {
         })}
       </Carousel>
       <Toast score={props.score || ""} finished={props.finished} />
-      <Button
-        onClick={() => dispatch(submit(questions)) && <Toast useState={true} />}
-      >
-        Submit
-      </Button>
+      <SubmitButton dispatch={dispatch} questions={questions} />
     </React.Fragment>
   );
 };

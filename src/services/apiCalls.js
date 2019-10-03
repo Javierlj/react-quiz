@@ -1,6 +1,6 @@
 import { initQuestions } from '../redux/actions';
 
-export const getQuestions = (dispatch) => {
+const getQuestions = (dispatch) => {
   fetch(
     'https://quiz.dit.upm.es/api/quizzes/random10wa?token=1f92a6d7b7fd303df1aa',
   )
@@ -8,5 +8,8 @@ export const getQuestions = (dispatch) => {
     .then((myJson) => {
       dispatch(initQuestions(myJson));
     })
-    .catch((error) => console.log(error));
+    // eslint-disable-next-line no-console
+    .catch((error) => console.error(error));
 };
+
+export default getQuestions;

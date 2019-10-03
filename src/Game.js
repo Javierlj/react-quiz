@@ -7,7 +7,7 @@ import Buttons from './components/Buttons/Buttons';
 import NavBar from './components/NavBar/NavBar';
 
 import { questionAnswer } from './redux/actions';
-import { getQuestions } from './services/apiCalls';
+import getQuestions from './services/apiCalls';
 
 import './Game.sass';
 

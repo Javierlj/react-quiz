@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
+import PropTypes from 'prop-types';
+
 
 const Toast = (props) => {
   const [show, setShow] = useState(false);
@@ -13,10 +15,10 @@ const Toast = (props) => {
     <>
       <Alert show={show} variant="success">
         <Alert.Heading>
-You got
+          You got
           {score}
 
-rigth!
+          rigth!
         </Alert.Heading>
         <div className="d-flex justify-content-end">
           <Button onClick={() => setShow(false)} variant="outline-success">
@@ -28,4 +30,8 @@ rigth!
   );
 };
 
+Toast.propTypes = {
+  score: PropTypes.number.isRequired,
+  finished: PropTypes.bool.isRequired,
+};
 export default Toast;

@@ -12,6 +12,8 @@ function score(state = 0, action = {}) {
       return action.questions.filter(
         question => question.answer === question.userAnswer
       ).length;
+    case RESET:
+      return 0;
     default:
       return state;
   }
@@ -20,6 +22,8 @@ function finished(state = false, action = {}) {
   switch (action.type) {
     case SUBMIT:
       return true;
+    case RESET:
+      return false;
     default:
       return state;
   }
@@ -49,12 +53,8 @@ function questions(state = [], action = {}) {
 
     case INIT_QUESTIONS:
       return action.questions;
-
     case RESET:
-      return state.map(question => {
-        return { ...question, userAnswer: "" };
-      });
-
+      return action.questions;
     default:
       return state;
   }

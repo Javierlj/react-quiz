@@ -40,7 +40,7 @@ const Question = props => {
         <p>{question.question}</p>
         <input
           type="text"
-          value={question.userAnswer}
+          value={question.userAnswer || ""}
           onChange={e => onQuestionAnswer(e.target.value)}
         />
         <p>Tips</p>

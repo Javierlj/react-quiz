@@ -1,15 +1,20 @@
-import { initQuestions } from '../redux/actions';
+import { initQuestions, reset } from "../redux/actions";
 
-const getQuestions = (dispatch) => {
-  fetch(
-    'https://quiz.dit.upm.es/api/quizzes/random10wa?token=1f92a6d7b7fd303df1aa',
-  )
-    .then((response) => response.json())
-    .then((myJson) => {
-      dispatch(initQuestions(myJson));
-    })
-    // eslint-disable-next-line no-console
-    .catch((error) => console.error(error));
+const getQuestionsFromApi = async () => {
+  const response = await fetch(
+    "https://quiz.dit.upm.es/api/quizzes/random10wa?token=1f92a6d7b7fd303df1aa"
+  );
+  const questions = await response.json();
+  return questions;
 };
 
-export default getQuestions;
+const getQuestions = async dispatch => {
+  const questions = await getQuestionsFromApi();
+  dispatch(initQuestions(questions));
+};
+
+const resetQuestions = async dispatch => {
+  const questions = await getQuestionsFromApi();
+  dispatch(reset(questions));
+};
+export { getQuestions, resetQuestions };

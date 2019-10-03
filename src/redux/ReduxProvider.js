@@ -17,6 +17,12 @@ export default class ReduxProvider extends Component {
     this.store = this.configureStore();
   }
 
+  configureStore() {
+    const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__
+      && window.__REDUX_DEVTOOLS_EXTENSION__();
+    return createStore(GlobalState, this.initialState, reduxDevTools);
+  }
+
   render() {
     return (
       <Provider store={this.store}>
@@ -25,11 +31,5 @@ export default class ReduxProvider extends Component {
         </div>
       </Provider>
     );
-  }
-
-  configureStore() {
-    const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__
-      && window.__REDUX_DEVTOOLS_EXTENSION__();
-    return createStore(GlobalState, this.initialState, reduxDevTools);
   }
 }

@@ -22,9 +22,9 @@ export function reset(questions) {
   return { type: RESET, questions };
 }
 
-export function next_question(questions) {
+export function nextQuestion() {
   return { type: NEXT_QUESTION };
 }
-export function previous_question(questions) {
+export function previousQuestion() {
   return { type: PREVIOUS_QUESTION };
 }

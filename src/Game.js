@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import Question from './components/Question/question';
-import { questionAnswer } from './redux/actions';
-import Toast from './components/Toast';
 import Buttons from './components/Buttons/Buttons';
 import NavBar from './components/NavBar/NavBar';
-import './Game.sass';
+
+import { questionAnswer } from './redux/actions';
 import { getQuestions } from './services/apiCalls';
 
+import './Game.sass';
+
+
 const Game = (props) => {
-  const { dispatch, questions, currentQuestion, score } = props;
+  const { dispatch, questions, currentQuestion } = props;
   const onQuestionAnswer = (answer) => {
     dispatch(questionAnswer(currentQuestion, answer));
   };
@@ -21,18 +25,17 @@ const Game = (props) => {
   return questions.length === 0 ? (
     <p>No hay preguntas</p>
   ) : (
-      <div style={{ height: '100%' }}>
-        <NavBar />
-        <div className="game">
-          <Question
-            question={questions[currentQuestion]}
-            onQuestionAnswer={(answer) => onQuestionAnswer(answer)}
-          />
-        </div>
-        <Toast score={score || ''} finished={false} />
-        <Buttons />
+    <div>
+      <NavBar />
+      <div className="game">
+        <Question
+          question={questions[currentQuestion]}
+          onQuestionAnswer={(answer) => onQuestionAnswer(answer)}
+        />
       </div>
-    );
+      <Buttons />
+    </div>
+  );
 };
 
 function mapStateToProps(state) {
@@ -42,5 +45,11 @@ function mapStateToProps(state) {
     currentQuestion,
   };
 }
+
+Game.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentQuestion: PropTypes.number.isRequired,
+};
 
 export default connect(mapStateToProps)(Game);

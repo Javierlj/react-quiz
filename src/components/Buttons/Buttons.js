@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import CustomButton from './Button';
 import { submit, reset } from '../../redux/actions';
@@ -17,6 +18,11 @@ const Buttons = (props) => {
       {buttons.map((button) => <CustomButton key={button.id} button={button} />)}
     </div>
   );
+};
+
+Buttons.propTypes = {
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {

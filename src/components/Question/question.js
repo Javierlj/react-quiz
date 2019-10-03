@@ -1,7 +1,8 @@
-import React from 'react';
-import './question.sass';
+import React from "react";
+import "./question.sass";
+import defaultProps from "prop-types";
 
-const Question = (props) => {
+const Question = props => {
   const { question, onQuestionAnswer } = props;
   return (
     <div className="question">
@@ -10,11 +11,13 @@ const Question = (props) => {
         <p>{question.question}</p>
         <input
           type="text"
-          value={question.userAnswer || ''}
-          onChange={(e) => onQuestionAnswer(e.target.value)}
+          value={question.userAnswer || ""}
+          onChange={e => onQuestionAnswer(e.target.value)}
         />
         <p>Tips</p>
-        {question.tips.length === 0 ? 'No tips' : question.tips.map((tip) => <p>{tip}</p>)}
+        {question.tips.length === 0
+          ? "No tips"
+          : question.tips.map(tip => <p>{tip}</p>)}
       </div>
       <div>
         <img
@@ -27,5 +30,23 @@ const Question = (props) => {
     </div>
   );
 };
+
+Question.propTypes = {
+  question: propTypes.shape({
+    question: PropTypes.string.isRequired,
+    attachment: propTypes.shape({
+      url: PropTypes.string.isRequired
+    }).isRequired,
+    tips: PropTypes.arrayOf(PropTypes.string),
+    userAnswer: PropTypes.string,
+    author: propTypes.shape({
+      photo: PropTypes.string,
+      username: PropTypes.string
+    })
+  }).isRequired,
+  onQuestionAnswer: PropTypes.func.isRequired
+};
+
+Question.defaultProps = {};
 
 export default Question;

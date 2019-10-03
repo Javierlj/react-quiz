@@ -1,15 +1,16 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 import {QUESTION_ANSWER,
   INIT_QUESTIONS,
   SUBMIT,
   NEXT_QUESTION,
-  PREVIOUS_QUESTION,} from './actions';
+  PREVIOUS_QUESTION,
+  RESET} from "./actions";
 
 function score(state = 0, action = {}) {
   switch (action.type) {
     case SUBMIT:
       return action.questions.filter(
-        (question) => question.answer === question.userAnswer,
+        question => question.answer === question.userAnswer
       ).length;
     default:
       return state;
@@ -43,11 +44,16 @@ function questions(state = [], action = {}) {
         userAnswer:
           action.payload.index === i
             ? action.payload.answer
-            : question.userAnswer,
+            : question.userAnswer
       }));
 
     case INIT_QUESTIONS:
       return action.questions;
+
+    case RESET:
+      return state.map(question => {
+        return { ...question, userAnswer: "" };
+      });
 
     default:
       return state;
@@ -58,7 +64,7 @@ const GlobalState = combineReducers({
   score,
   finished,
   questions,
-  currentQuestion,
+  currentQuestion
 });
 
 export default GlobalState;

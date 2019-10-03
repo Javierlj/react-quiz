@@ -24,18 +24,25 @@ const Game = (props) => {
 
   return questions.length === 0 ? (
     <p>No hay preguntas</p>
-  ) : (
-    <div>
-      <NavBar />
-      <div className="game">
-        <Question
-          question={questions[currentQuestion]}
-          onQuestionAnswer={(answer) => onQuestionAnswer(answer)}
-        />
+  )
+    : (
+      <div>
+        <NavBar />
+        <div className="game">
+          <Question
+            question={questions[currentQuestion]}
+            onQuestionAnswer={(answer) => onQuestionAnswer(answer)}
+          />
+        </div>
+        <Buttons />
       </div>
-      <Buttons />
-    </div>
-  );
+    );
+};
+
+Game.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentQuestion: PropTypes.number.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -46,10 +53,5 @@ function mapStateToProps(state) {
   };
 }
 
-Game.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  currentQuestion: PropTypes.number.isRequired,
-};
 
 export default connect(mapStateToProps)(Game);

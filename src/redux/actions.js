@@ -1,6 +1,10 @@
-export const QUESTION_ANSWER = "QUESTION_ANSWER";
-export const INIT_QUESTIONS = "INIT_QUESTIONS";
-export const SUBMIT = "SUBMIT";
+export const QUESTION_ANSWER = 'QUESTION_ANSWER';
+export const INIT_QUESTIONS = 'INIT_QUESTIONS';
+export const SUBMIT = 'SUBMIT';
+export const RESET = 'RESET';
+export const NEXT_QUESTION = 'NEXT_QUESTION';
+export const PREVIOUS_QUESTION = 'PREVIOUS_QUESTION';
+
 
 export function questionAnswer(index, answer) {
   return { type: QUESTION_ANSWER, payload: { index, answer } };
@@ -12,4 +16,15 @@ export function initQuestions(questions) {
 
 export function submit(questions) {
   return { type: SUBMIT, questions };
+}
+
+export function reset(questions) {
+  return { type: RESET, questions };
+}
+
+export function next_question(questions) {
+  return { type: NEXT_QUESTION };
+}
+export function previous_question(questions) {
+  return { type: PREVIOUS_QUESTION };
 }

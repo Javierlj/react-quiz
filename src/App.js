@@ -1,10 +1,10 @@
-import React from "react";
-import "./App.css";
-import Game from "./Game";
+import React from 'react';
+import './App.css';
+import Game from './Game';
 
-function App(props) {
+function App() {
   return (
-    <div className={"App"}>
+    <div className="App">
       <Game />
     </div>
   );

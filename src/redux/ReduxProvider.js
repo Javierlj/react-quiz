@@ -1,9 +1,9 @@
-import { Provider } from "react-redux";
-import GlobalState from "./reducers";
-import { createStore } from "redux";
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-import React, { Component } from "react";
-import App from "../App";
+import React, { Component } from 'react';
+import GlobalState from './reducers';
+import App from '../App';
 
 export default class ReduxProvider extends Component {
   constructor(props) {
@@ -11,7 +11,8 @@ export default class ReduxProvider extends Component {
     this.initialState = {
       score: 0,
       finished: false,
-      questions: []
+      questions: [],
+      currentQuestion: 0,
     };
     this.store = this.configureStore();
   }
@@ -19,16 +20,16 @@ export default class ReduxProvider extends Component {
   render() {
     return (
       <Provider store={this.store}>
-        <div style={{ height: "100%" }}>
+        <div style={{ height: '100%' }}>
           <App store={this.store} />
         </div>
       </Provider>
     );
   }
+
   configureStore() {
-    const reduxDevTools =
-      window.__REDUX_DEVTOOLS_EXTENSION__ &&
-      window.__REDUX_DEVTOOLS_EXTENSION__();
+    const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__
+      && window.__REDUX_DEVTOOLS_EXTENSION__();
     return createStore(GlobalState, this.initialState, reduxDevTools);
   }
 }

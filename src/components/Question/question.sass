@@ -1,6 +1,6 @@
 .question
     display: flex
-    flex-direction: row
+    flex-direction: column
     padding-top: 100px
     padding-bottom: 100px
     padding-right: 20px
@@ -12,15 +12,16 @@
         display: flex
         flex-direction: row
         justify-content: space-between
+        align-items: center
         padding: 75px
         width: 100%
         background: #54505B
         .question_main_image
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 300px
-                width: 500px
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 300px
+            width: 500px
 
         .question_main_data
             display: flex
@@ -37,13 +38,15 @@
                 justify-content: space-around
                 display: flex
 
-        .question_bottom
+    .question_bottom
+        display: flex
+        flex-direction: row
+        align-items: flex-end
+        .question_author_photo
             display: flex
-            .question_author_photo
-                display: flex
-                height: 40px
-                width: 40px    
-                border-radius: 50%
-                justify-content: bottom
-            .question_author_name
-                color: #a9fbd7
+            height: 40px
+            width: 40px    
+            border-radius: 50%
+            justify-content: bottom
+        .question_author_name
+            color: #54505B

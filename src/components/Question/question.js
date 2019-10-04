@@ -7,11 +7,13 @@ import "./question.sass";
 import { nextQuestion, previousQuestion } from "../../redux/actions";
 
 const Question = props => {
-  const {question,
+  const {
+    question,
     onQuestionAnswer,
     dispatch,
     currentQuestion,
-    questions} = props;
+    questions
+  } = props;
 
   const buttonStyle = {
     "background-color": "transparent",
@@ -35,25 +37,10 @@ const Question = props => {
   return (
     <div className="question">
       <div className="question_main">
-      <CustomButton button={previousButton} disabled={currentQuestion === 0} />
-      <img className="question_image" src={question.attachment.url} alt="" />
-      <div>
-        <p>{question.question}</p>
-        <input
-          type="text"
-          value={question.userAnswer || ""}
-          onChange={e => onQuestionAnswer(e.target.value)}
+        <CustomButton
+          button={previousButton}
+          disabled={currentQuestion === 0}
         />
-        <p>Tips</p>
-        {question.tips.length === 0
-          ? "No tips"
-          : question.tips.map(tip => <p>{tip}</p>)}
-      </div>
-      <CustomButton
-        button={nextButton}
-        disabled={currentQuestion === questions.length - 1}
-      />
-      <div>
         <img
           className="question_main_image"
           src={question.attachment.url}
@@ -64,7 +51,7 @@ const Question = props => {
           <input
             className="question_main_input"
             type="text"
-            value={question.userAnswer}
+            value={question.userAnswer || ""}
             onChange={e => onQuestionAnswer(e.target.value)}
           />
           <p className="question_main_tips">Tips</p>
@@ -72,14 +59,18 @@ const Question = props => {
             ? "No tips"
             : question.tips.map(tip => <p>{tip}</p>)}
         </div>
-        <div className="question_bottom">
-          <img
-            className="question_author_photo"
-            src={question.author.photo.url}
-            alt=""
-          />
-          <p className="question_author_name">{question.author.username}</p>
-        </div>
+        <CustomButton
+          button={nextButton}
+          disabled={currentQuestion === questions.length - 1}
+        />
+      </div>
+      <div className="question_bottom">
+        <img
+          className="question_author_photo"
+          src={question.author.photo.url}
+          alt=""
+        />
+        <p className="question_author_name">{question.author.username}</p>
       </div>
     </div>
   );

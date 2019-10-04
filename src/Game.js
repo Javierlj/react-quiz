@@ -7,11 +7,7 @@ import Buttons from "./components/Buttons/Buttons";
 import NavBar from "./components/NavBar/NavBar";
 
 import { questionAnswer } from "./redux/actions";
-<<<<<<< Updated upstream
 import { getQuestions } from "./services/apiCalls";
-=======
-import getQuestions from "./services/apiCalls";
->>>>>>> Stashed changes
 
 import "./Game.sass";
 
@@ -59,13 +55,4 @@ function mapStateToProps(state) {
   };
 }
 
-<<<<<<< Updated upstream
-=======
-Game.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  currentQuestion: PropTypes.number.isRequired
-};
-
->>>>>>> Stashed changes
 export default connect(mapStateToProps)(Game);

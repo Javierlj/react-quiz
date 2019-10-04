@@ -34,6 +34,7 @@ const Question = props => {
 
   return (
     <div className="question">
+      <div className="question_main">
       <CustomButton button={previousButton} disabled={currentQuestion === 0} />
       <img className="question_image" src={question.attachment.url} alt="" />
       <div>
@@ -54,11 +55,31 @@ const Question = props => {
       />
       <div>
         <img
-          className="question_author_photo"
-          src={question.author.photo.url}
+          className="question_main_image"
+          src={question.attachment.url}
           alt=""
         />
-        <p className="question_author_name">{question.author.username}</p>
+        <div className="question_main_data">
+          <p className="question_main_text">{question.question}</p>
+          <input
+            className="question_main_input"
+            type="text"
+            value={question.userAnswer}
+            onChange={e => onQuestionAnswer(e.target.value)}
+          />
+          <p className="question_main_tips">Tips</p>
+          {question.tips.length === 0
+            ? "No tips"
+            : question.tips.map(tip => <p>{tip}</p>)}
+        </div>
+        <div className="question_bottom">
+          <img
+            className="question_author_photo"
+            src={question.author.photo.url}
+            alt=""
+          />
+          <p className="question_author_name">{question.author.username}</p>
+        </div>
       </div>
     </div>
   );

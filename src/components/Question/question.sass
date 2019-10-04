@@ -1,17 +1,49 @@
 .question
     display: flex
     flex-direction: row
-    padding: 100px
+    padding-top: 100px
+    padding-bottom: 100px
+    padding-right: 20px
+    padding-left: 20px
     justify-content: space-around
     align-items: center
-    .question_image
-        height: 300px
-        width: 500px
-    .question_author_photo
+
+    .question_main
         display: flex
-        height: 40px
-        width: 40px    
-        border-radius: 50%
-        justify-content: bottom
-    .question_author_name
-        color: #54505B
+        flex-direction: row
+        justify-content: space-between
+        padding: 75px
+        width: 100%
+        background: #54505B
+        .question_main_image
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 300px
+                width: 500px
+
+        .question_main_data
+            display: flex
+            justify-content: space-between
+            flex-direction: column
+            .question_main_text
+                font-size: 30px
+                justify-content: space-around
+                display: flex
+            .question_main_input
+                justify-content: space-around
+                display: flex
+            .question_main_tips
+                justify-content: space-around
+                display: flex
+
+        .question_bottom
+            display: flex
+            .question_author_photo
+                display: flex
+                height: 40px
+                width: 40px    
+                border-radius: 50%
+                justify-content: bottom
+            .question_author_name
+                color: #a9fbd7

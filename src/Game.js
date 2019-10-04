@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import Question from "./components/Question/question";
+import Question from "./components/Question/Question";
 import Buttons from "./components/Buttons/Buttons";
 import NavBar from "./components/NavBar/NavBar";
 
@@ -35,8 +35,8 @@ const Game = props => {
           question={questions[currentQuestion]}
           onQuestionAnswer={answer => onQuestionAnswer(answer)}
         />
+        <Buttons />
       </div>
-      <Buttons />
     </div>
   );
 };

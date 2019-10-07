@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React from "react";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
@@ -5,19 +6,18 @@ import { connect } from "react-redux";
 import CustomButton from "../Buttons/Button";
 import "./question.sass";
 import { nextQuestion, previousQuestion } from "../../redux/actions";
+import CustomList from "../CustomList/CustomList";
 
 const Question = props => {
-  const {
-    question,
+  const {question,
     onQuestionAnswer,
     dispatch,
     currentQuestion,
-    questions
-  } = props;
+    questions} = props;
 
   const buttonStyle = {
     "background-color": "transparent",
-    color: "54505B",
+    color: "black",
     height: "100%",
     padding: 0,
     border: "none",
@@ -43,10 +43,15 @@ const Question = props => {
         />
         <img
           className="question_main_image"
-          src={question.attachment.url}
+          src={
+            question.attachment && question.attachment.url
+              ? question.attachment.url
+              : "https://www.bernardsqualitycars.com/dist/img/nophoto.jpg"
+          }
           alt=""
         />
         <div className="question_main_data">
+          <p className="question_main_number">Question {currentQuestion + 1}</p>
           <p className="question_main_text">{question.question}</p>
           <input
             className="question_main_input"
@@ -54,10 +59,7 @@ const Question = props => {
             value={question.userAnswer || ""}
             onChange={e => onQuestionAnswer(e.target.value)}
           />
-          <p className="question_main_tips">Tips</p>
-          {question.tips.length === 0
-            ? "No tips"
-            : question.tips.map(tip => <p>{tip}</p>)}
+          <CustomList title="Tips" listItems={question.tips} />
         </div>
         <CustomButton
           button={nextButton}

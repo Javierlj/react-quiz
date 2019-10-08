@@ -21,7 +21,7 @@ const CountDown = props => {
 CountDown.propTypes = {
   finished: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
-  questions: PropTypes.arrayOf(PropTypes.objects)
+  questions: PropTypes.arrayOf(PropTypes.object)
 };
 
 CountDown.defaultProps = {

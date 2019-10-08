@@ -1,7 +1,9 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Spinner } from "react-bootstrap";
 
 import Question from "./components/Question/Question";
 import Buttons from "./components/Buttons/Buttons";
@@ -13,7 +15,12 @@ import { getQuestions } from "./services/apiCalls";
 import "./Game.sass";
 
 const Game = props => {
-  const { dispatch, questions, currentQuestion, history, finished } = props;
+  const {dispatch,
+    questions,
+    currentQuestion,
+    history,
+    finished,
+    loading} = props;
 
   const onQuestionAnswer = answer => {
     dispatch(questionAnswer(currentQuestion, answer));
@@ -29,7 +36,11 @@ const Game = props => {
     }
   }, [finished]);
 
-  return questions.length === 0 ? (
+  return loading ? (
+    <Spinner animation="border" role="status">
+      <span className="sr-only">Loading...</span>
+    </Spinner>
+  ) : questions.length === 0 ? (
     <p>No hay preguntas</p>
   ) : (
     <div>
@@ -50,7 +61,8 @@ Game.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
   currentQuestion: PropTypes.number.isRequired,
   finished: PropTypes.bool.isRequired,
-  history: PropTypes.any.isRequired
+  history: PropTypes.any.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {

@@ -3,13 +3,12 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import CustomButton from "./Button";
-import { submit } from "../../redux/actions";
 import "./buttons.sass";
 import { resetQuestions } from "../../services/apiCalls";
 import CustomModal from "../CustomModal/CustomModal";
 
 const Buttons = props => {
-  const { dispatch, questions, history } = props;
+  const { dispatch, history } = props;
   const [modalShow, setModalShow] = React.useState(false);
   const buttons = [
     {
@@ -37,7 +36,6 @@ const Buttons = props => {
 };
 
 Buttons.propTypes = {
-  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.any.isRequired
 };

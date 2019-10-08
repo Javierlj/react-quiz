@@ -6,7 +6,8 @@ import {QUESTION_ANSWER,
   NEXT_QUESTION,
   PREVIOUS_QUESTION,
   CHANGE_QUESTION,
-  RESET} from "./actions";
+  RESET,
+  LOADING} from "./actions";
 
 function score(state = 0, action = {}) {
   switch (action.type) {
@@ -66,11 +67,25 @@ function questions(state = [], action = {}) {
   }
 }
 
+function loading(state = [], action = {}) {
+  switch (action.type) {
+    case INIT_QUESTIONS:
+      return false;
+    case RESET:
+      return false;
+    case LOADING:
+      return true;
+    default:
+      return state;
+  }
+}
+
 const GlobalState = combineReducers({
   score,
   finished,
   questions,
-  currentQuestion
+  currentQuestion,
+  loading
 });
 
 export default GlobalState;

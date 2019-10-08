@@ -1,4 +1,4 @@
-import { initQuestions, reset } from "../redux/actions";
+import { initQuestions, reset, loading } from "../redux/actions";
 import { defaultQuestions } from "../defaultQuestion";
 
 const getQuestionsFromApi = async () => {
@@ -10,12 +10,14 @@ const getQuestionsFromApi = async () => {
 };
 
 const getQuestions = async dispatch => {
+  dispatch(loading());
   let questions = await getQuestionsFromApi();
   questions = questions || defaultQuestions;
   dispatch(initQuestions(questions));
 };
 
 const resetQuestions = async dispatch => {
+  dispatch(loading());
   let questions = await getQuestionsFromApi();
   questions = questions || defaultQuestions;
   dispatch(reset(questions));

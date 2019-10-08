@@ -5,6 +5,7 @@ export const RESET = "RESET";
 export const NEXT_QUESTION = "NEXT_QUESTION";
 export const PREVIOUS_QUESTION = "PREVIOUS_QUESTION";
 export const CHANGE_QUESTION = "CHANGE_QUESTION";
+export const LOADING = "LOADING";
 
 export function questionAnswer(index, answer) {
   return { type: QUESTION_ANSWER, payload: { index, answer } };
@@ -31,4 +32,8 @@ export function previousQuestion() {
 
 export function changeQuestion(index) {
   return { type: CHANGE_QUESTION, index };
+}
+
+export function loading() {
+  return { type: LOADING };
 }

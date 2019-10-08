@@ -15,6 +15,7 @@ const CustomButton = props => {
       style={style}
       onClick={buttonFunction}
       disabled={disabled}
+      className={disabled ? "disabled" : ""}
     >
       {name}
     </button>

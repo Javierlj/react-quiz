@@ -1,15 +1,10 @@
 import { Provider } from "react-redux";
 import { createStore } from "redux";
+import { BrowserRouter } from "react-router-dom";
 
 import React, { Component } from "react";
 import GlobalState from "./reducers";
 import App from "../App";
-
-import createHistory from "history/createBrowserHistory";
-import Results from "../components/Results/Results";
-import { Router, Route, Switch } from "react-router";
-
-const history = createHistory();
 
 export default class ReduxProvider extends Component {
   constructor(props) {
@@ -33,12 +28,9 @@ export default class ReduxProvider extends Component {
   render() {
     return (
       <Provider store={this.store}>
-        <Router history={history}>
-          <Switch>
-            <Route path="/results" component={Results} />
-            <Route path="/" component={App} />
-          </Switch>
-        </Router>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </Provider>
     );
   }

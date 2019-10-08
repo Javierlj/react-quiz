@@ -7,6 +7,7 @@ import CustomButton from "../Buttons/Button";
 import "./question.sass";
 import { nextQuestion, previousQuestion } from "../../redux/actions";
 import CustomList from "../CustomList/CustomList";
+import Indicators from "../Indicators/Indicators";
 
 const Question = props => {
   const {question,
@@ -67,12 +68,16 @@ const Question = props => {
         />
       </div>
       <div className="question_bottom">
-        <img
-          className="question_author_photo"
-          src={question.author.photo.url}
-          alt=""
-        />
-        <p className="question_author_name">{question.author.username}</p>
+        <div className="question_author">
+          <img
+            className="question_author_photo"
+            src={question.author.photo.url}
+            alt=""
+          />
+          <p className="question_author_name">{question.author.username}</p>
+        </div>
+        <Indicators className="game_indicators" length={questions.length} />
+        <div style={{ width: "70px" }} />
       </div>
     </div>
   );

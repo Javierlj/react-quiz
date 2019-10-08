@@ -1,14 +1,12 @@
 import { combineReducers } from "redux";
-import { routerReducer } from "react-router-redux";
 
-import {
-  QUESTION_ANSWER,
+import {QUESTION_ANSWER,
   INIT_QUESTIONS,
   SUBMIT,
   NEXT_QUESTION,
   PREVIOUS_QUESTION,
-  RESET
-} from "./actions";
+  CHANGE_QUESTION,
+  RESET} from "./actions";
 
 function score(state = 0, action = {}) {
   switch (action.type) {
@@ -39,6 +37,10 @@ function currentQuestion(state = 0, action = {}) {
       return state + 1;
     case PREVIOUS_QUESTION:
       return state - 1;
+    case CHANGE_QUESTION:
+      return action.index;
+    case RESET:
+      return 0;
     default:
       return state;
   }
@@ -68,8 +70,7 @@ const GlobalState = combineReducers({
   score,
   finished,
   questions,
-  currentQuestion,
-  routing: routerReducer
+  currentQuestion
 });
 
 export default GlobalState;

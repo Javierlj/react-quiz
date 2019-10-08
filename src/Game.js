@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import Countdown from "react-countdown-now";
 
 import Question from "./components/Question/Question";
 import Buttons from "./components/Buttons/Buttons";
-import NavBar from "./components/NavBar/NavBar";
+import CustomModal from "./components/CustomModal/CustomModal";
 
 import { questionAnswer } from "./redux/actions";
 import { getQuestions } from "./services/apiCalls";
@@ -17,20 +18,34 @@ const Game = props => {
     dispatch(questionAnswer(currentQuestion, answer));
   };
 
+  const [modalShow, setModalShow] = React.useState(false);
+
   useEffect(() => {
     getQuestions(dispatch);
   }, []);
 
-  useEffect(() => {
-    document.getElementsByTagName("input").value = "ds";
-  }, [questions]);
+  // eslint-disable-next-line react/prop-types
+  const renderer = ({ seconds, completed }) => {
+    if (completed) {
+      setModalShow(true);
+    }
+    // Render a countdown
+    return <span>{seconds}</span>;
+  };
 
   return questions.length === 0 ? (
     <p>No hay preguntas</p>
   ) : (
     <div>
-      <NavBar />
       <div className="game">
+        <Countdown date={Date.now() + 50000} renderer={renderer} />
+        <CustomModal
+          title="Finalizar quiz"
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        >
+          <p>Hola</p>
+        </CustomModal>
         <Question
           question={questions[currentQuestion]}
           onQuestionAnswer={answer => onQuestionAnswer(answer)}

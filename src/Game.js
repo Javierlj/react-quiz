@@ -1,29 +1,33 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import Question from "./components/Question/Question";
 import Buttons from "./components/Buttons/Buttons";
-import CustomModal from "./components/CustomModal/CustomModal";
+import CountDown from "./components/CountDown/CountDown";
 
-import { questionAnswer, reset } from "./redux/actions";
+import { questionAnswer } from "./redux/actions";
 import { getQuestions } from "./services/apiCalls";
 
 import "./Game.sass";
-import CountDown from "./components/CountDown/CountDown";
 
 const Game = props => {
-  const { dispatch, questions, currentQuestion, history } = props;
+  const { dispatch, questions, currentQuestion, history, finished } = props;
+
   const onQuestionAnswer = answer => {
     dispatch(questionAnswer(currentQuestion, answer));
   };
 
-  const [modalShow, setModalShow] = useState(true);
-
   useEffect(() => {
     getQuestions(dispatch);
   }, []);
+
+  useEffect(() => {
+    if (finished) {
+      history.push("/results");
+    }
+  }, [finished]);
 
   return questions.length === 0 ? (
     <p>No hay preguntas</p>
@@ -31,18 +35,6 @@ const Game = props => {
     <div>
       <div className="game">
         <CountDown />
-        <CustomModal
-          title="Time's up!"
-          show={modalShow}
-          history={history}
-          onHide={() => setModalShow(false)}
-          openResults={() => window.open("/results")}
-          reset={() => dispatch(reset())}
-        >
-          <p>Correct answers: </p>
-          <p>Wrong answers: </p>
-          <p>To see the results click on the button! </p>
-        </CustomModal>
         <Question
           question={questions[currentQuestion]}
           onQuestionAnswer={answer => onQuestionAnswer(answer)}
@@ -58,7 +50,7 @@ Game.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
   currentQuestion: PropTypes.number.isRequired,
   finished: PropTypes.bool.isRequired,
-  score: PropTypes.number.isRequired
+  history: PropTypes.any.isRequired
 };
 
 function mapStateToProps(state) {

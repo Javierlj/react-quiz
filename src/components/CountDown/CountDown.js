@@ -12,7 +12,7 @@ const CountDown = props => {
     <ReactCountdownClock
       size={100}
       paused={finished}
-      seconds={120}
+      seconds={10}
       onComplete={() => dispatch(submit(questions))}
     />
   );

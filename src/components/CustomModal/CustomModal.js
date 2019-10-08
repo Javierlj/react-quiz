@@ -1,7 +1,6 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import { PropTypes } from "prop-types";
-import { push } from "react-router-redux";
 
 function CustomModal(props) {
   const { onHide, title, children, history } = props;
@@ -18,7 +17,7 @@ function CustomModal(props) {
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => history.push("/results")}>Results</Button>
+        <Button onClick={() => history.push("/results")}>Submit</Button>
         <Button variant="danger" onClick={onHide}>
           Close
         </Button>
@@ -29,10 +28,9 @@ function CustomModal(props) {
 
 CustomModal.propTypes = {
   onHide: PropTypes.func.isRequired,
-  openResults: PropTypes.func.isRequired,
-  reset: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
-  children: PropTypes.any
+  children: PropTypes.any,
+  history: PropTypes.any.isRequired
 };
 
 CustomModal.defaultProps = {

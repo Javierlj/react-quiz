@@ -29,7 +29,6 @@ const Buttons = props => {
         show={modalShow}
         history={history}
         onHide={() => setModalShow(false)}
-        onClick={() => dispatch(submit(questions))}
       >
         <p>Check you have answered everything before submitting! </p>
       </CustomModal>
@@ -39,7 +38,8 @@ const Buttons = props => {
 
 Buttons.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.any.isRequired
 };
 
 function mapStateToProps(state) {

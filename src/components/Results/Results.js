@@ -1,4 +1,6 @@
 import React from "react";
+import { PropTypes } from "prop-types";
+
 import CustomButton from "../Buttons/Button";
 
 const Results = props => {
@@ -25,6 +27,10 @@ const Results = props => {
       <CustomButton button={backButton} />
     </div>
   );
+};
+
+Results.propTypes = {
+  history: PropTypes.any.isRequired
 };
 
 export default Results;

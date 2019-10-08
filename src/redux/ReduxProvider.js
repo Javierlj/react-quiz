@@ -13,7 +13,8 @@ export default class ReduxProvider extends Component {
       score: 0,
       finished: false,
       questions: [],
-      currentQuestion: 0
+      currentQuestion: 0,
+      timeLeft: 120
     };
     this.store = this.configureStore();
   }

@@ -29,6 +29,8 @@ function CustomModal(props) {
 
 CustomModal.propTypes = {
   onHide: PropTypes.func.isRequired,
+  openResults: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   children: PropTypes.any
 };

@@ -15,8 +15,8 @@ const Question = props => {
     onQuestionAnswer,
     dispatch,
     currentQuestion,
-    questions
-  } = props;
+    questions,
+    finished} = props;
 
   const buttonStyle = {
     "background-color": "transparent",
@@ -61,6 +61,7 @@ const Question = props => {
             type="text"
             value={question.userAnswer || ""}
             onChange={e => onQuestionAnswer(e.target.value)}
+            disabled={finished}
           />
           <CustomList title="Tips" listItems={question.tips} />
         </div>
@@ -103,7 +104,8 @@ Question.propTypes = {
   onQuestionAnswer: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   currentQuestion: PropTypes.number.isRequired,
-  questions: PropTypes.arrayOf(PropTypes.object).isRequired
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  finished: PropTypes.bool.isRequired
 };
 
 Question.defaultProps = {
@@ -123,10 +125,11 @@ Question.defaultProps = {
 };
 
 function mapStateToProps(state) {
-  const { questions, currentQuestion } = state;
+  const { questions, currentQuestion, finished } = state;
   return {
     questions,
-    currentQuestion
+    currentQuestion,
+    finished
   };
 }
 

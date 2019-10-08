@@ -1,16 +1,17 @@
-import React, { useEffect } from "react";
+/* eslint-disable react/jsx-one-expression-per-line */
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import Countdown from "react-countdown-now";
 
 import Question from "./components/Question/Question";
 import Buttons from "./components/Buttons/Buttons";
 import CustomModal from "./components/CustomModal/CustomModal";
 
-import { questionAnswer } from "./redux/actions";
+import { questionAnswer, reset } from "./redux/actions";
 import { getQuestions } from "./services/apiCalls";
 
 import "./Game.sass";
+import CountDown from "./components/CountDown/CountDown";
 
 const Game = props => {
   const { dispatch, questions, currentQuestion, history } = props;
@@ -18,32 +19,25 @@ const Game = props => {
     dispatch(questionAnswer(currentQuestion, answer));
   };
 
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(true);
 
   useEffect(() => {
     getQuestions(dispatch);
   }, []);
-
-  // eslint-disable-next-line react/prop-types
-  const renderer = ({ seconds, completed }) => {
-    if (completed) {
-      setModalShow(true);
-    }
-    // Render a countdown
-    return <span>{seconds}</span>;
-  };
 
   return questions.length === 0 ? (
     <p>No hay preguntas</p>
   ) : (
     <div>
       <div className="game">
-        <Countdown date={Date.now() + 50000} renderer={renderer} />
+        <CountDown />
         <CustomModal
           title="Time's up!"
           show={modalShow}
           history={history}
           onHide={() => setModalShow(false)}
+          openResults={() => window.open("/results")}
+          reset={() => dispatch(reset())}
         >
           <p>Correct answers: </p>
           <p>Wrong answers: </p>
@@ -62,15 +56,13 @@ const Game = props => {
 Game.propTypes = {
   dispatch: PropTypes.func.isRequired,
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  currentQuestion: PropTypes.number.isRequired
+  currentQuestion: PropTypes.number.isRequired,
+  finished: PropTypes.bool.isRequired,
+  score: PropTypes.number.isRequired
 };
 
 function mapStateToProps(state) {
-  const { questions, currentQuestion } = state;
-  return {
-    questions,
-    currentQuestion
-  };
+  return { ...state };
 }
 
 export default connect(mapStateToProps)(Game);

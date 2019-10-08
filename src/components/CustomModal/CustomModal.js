@@ -1,9 +1,10 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import { PropTypes } from "prop-types";
+import { push } from "react-router-redux";
 
 function CustomModal(props) {
-  const { onHide, title, children } = props;
+  const { onHide, title, children, history } = props;
   return (
     <Modal
       // eslint-disable-next-line react/jsx-props-no-spreading
@@ -17,7 +18,10 @@ function CustomModal(props) {
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>
-        <Button onClick={onHide}>Close</Button>
+        <Button onClick={() => history.push("/results")}>Results</Button>
+        <Button variant="danger" onClick={onHide}>
+          Close
+        </Button>
       </Modal.Footer>
     </Modal>
   );

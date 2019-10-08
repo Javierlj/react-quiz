@@ -6,14 +6,16 @@ import CustomButton from "./Button";
 import { submit } from "../../redux/actions";
 import "./buttons.sass";
 import { resetQuestions } from "../../services/apiCalls";
+import CustomModal from "../CustomModal/CustomModal";
 
 const Buttons = props => {
-  const { dispatch, questions } = props;
+  const { dispatch, questions, history } = props;
+  const [modalShow, setModalShow] = React.useState(false);
   const buttons = [
     {
       id: "1",
       name: "Submit",
-      buttonFunction: () => dispatch(submit(questions))
+      buttonFunction: () => setModalShow(true)
     },
     { id: "2", name: "Reset", buttonFunction: () => resetQuestions(dispatch) }
   ];
@@ -22,6 +24,15 @@ const Buttons = props => {
       {buttons.map(button => (
         <CustomButton key={button.id} button={button} />
       ))}
+      <CustomModal
+        title="Are you sure you want to submit your answers?"
+        show={modalShow}
+        history={history}
+        onHide={() => setModalShow(false)}
+        onClick={() => dispatch(submit(questions))}
+      >
+        <p>Check you have answered everything before submitting! </p>
+      </CustomModal>
     </div>
   );
 };

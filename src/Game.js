@@ -13,7 +13,7 @@ import { getQuestions } from "./services/apiCalls";
 import "./Game.sass";
 
 const Game = props => {
-  const { dispatch, questions, currentQuestion } = props;
+  const { dispatch, questions, currentQuestion, history } = props;
   const onQuestionAnswer = answer => {
     dispatch(questionAnswer(currentQuestion, answer));
   };
@@ -40,17 +40,20 @@ const Game = props => {
       <div className="game">
         <Countdown date={Date.now() + 50000} renderer={renderer} />
         <CustomModal
-          title="Finalizar quiz"
+          title="Time's up!"
           show={modalShow}
+          history={history}
           onHide={() => setModalShow(false)}
         >
-          <p>Hola</p>
+          <p>Correct answers: </p>
+          <p>Wrong answers: </p>
+          <p>To see the results click on the button! </p>
         </CustomModal>
         <Question
           question={questions[currentQuestion]}
           onQuestionAnswer={answer => onQuestionAnswer(answer)}
         />
-        <Buttons />
+        <Buttons history={history} />
       </div>
     </div>
   );

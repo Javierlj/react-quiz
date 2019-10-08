@@ -10,11 +10,13 @@ import CustomList from "../CustomList/CustomList";
 import Indicators from "../Indicators/Indicators";
 
 const Question = props => {
-  const {question,
+  const {
+    question,
     onQuestionAnswer,
     dispatch,
     currentQuestion,
-    questions} = props;
+    questions
+  } = props;
 
   const buttonStyle = {
     "background-color": "transparent",

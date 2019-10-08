@@ -1,5 +1,5 @@
 import React from "react";
-import ListGroup from "react-bootstrap/ListGroup";
+import { ListGroup } from "react-bootstrap";
 import { PropTypes } from "prop-types";
 import "./customList.sass";
 
@@ -9,7 +9,7 @@ const CustomList = props => {
     <div>
       <p className="title">{title}</p>
       {listItems.length === 0 ? (
-        <p>No element</p>
+        <p>No elements</p>
       ) : (
         <ListGroup>
           {listItems.map(item => {

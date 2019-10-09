@@ -11,14 +11,12 @@ import Indicators from "../Indicators/Indicators";
 import CountDown from "../CountDown/CountDown";
 
 const Question = props => {
-  const {
-    question,
+  const {question,
     onQuestionAnswer,
     dispatch,
     currentQuestion,
     questions,
-    finished
-  } = props;
+    finished} = props;
 
   const buttonStyle = {
     "background-color": "transparent",

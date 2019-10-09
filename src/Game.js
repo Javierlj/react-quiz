@@ -14,14 +14,12 @@ import { getQuestions } from "./services/apiCalls";
 import "./Game.sass";
 
 const Game = props => {
-  const {
-    dispatch,
+  const {dispatch,
     questions,
     currentQuestion,
     history,
     finished,
-    loading
-  } = props;
+    loading} = props;
 
   const onQuestionAnswer = answer => {
     dispatch(questionAnswer(currentQuestion, answer));
@@ -38,9 +36,11 @@ const Game = props => {
   }, [finished]);
 
   return loading ? (
-    <Spinner animation="border" role="status">
-      <span className="sr-only">Loading...</span>
-    </Spinner>
+    <div className="spinner">
+      <Spinner animation="border" role="status">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    </div>
   ) : questions.length === 0 ? (
     <p>No hay preguntas</p>
   ) : (

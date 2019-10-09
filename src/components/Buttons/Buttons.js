@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -8,8 +9,11 @@ import { resetQuestions } from "../../services/apiCalls";
 import CustomModal from "../CustomModal/CustomModal";
 
 const Buttons = props => {
-  const { dispatch, history } = props;
+  const { dispatch, history, questions } = props;
   const [modalShow, setModalShow] = React.useState(false);
+  const questionsResolved = questions.filter(question => question.userAnswer)
+    .length;
+  const questionsLength = questions.length;
   const buttons = [
     {
       id: "1",
@@ -29,6 +33,9 @@ const Buttons = props => {
         history={history}
         onHide={() => setModalShow(false)}
       >
+        <p>
+          You have answered {questionsResolved}/{questionsLength} questions
+        </p>
         <p>Check you have answered everything before submitting! </p>
       </CustomModal>
     </div>
@@ -37,7 +44,8 @@ const Buttons = props => {
 
 Buttons.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  history: PropTypes.any.isRequired
+  history: PropTypes.any.isRequired,
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 function mapStateToProps(state) {

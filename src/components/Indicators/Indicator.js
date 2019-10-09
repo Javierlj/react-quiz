@@ -9,8 +9,8 @@ const Indicator = props => {
 
   const activeStyles = () => {
     let styles = "";
-    styles += active ? "borderSelected" : "";
-    styles += answered ? "active" : "";
+    styles += active ? " borderSelected" : "";
+    styles += answered ? " active" : "";
     return styles;
   };
 

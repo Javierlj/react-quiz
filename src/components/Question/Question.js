@@ -8,6 +8,7 @@ import "./question.sass";
 import { nextQuestion, previousQuestion } from "../../redux/actions";
 import CustomList from "../CustomList/CustomList";
 import Indicators from "../Indicators/Indicators";
+import CountDown from "../CountDown/CountDown";
 
 const Question = props => {
   const {
@@ -16,7 +17,8 @@ const Question = props => {
     dispatch,
     currentQuestion,
     questions,
-    finished} = props;
+    finished
+  } = props;
 
   const buttonStyle = {
     "background-color": "transparent",
@@ -44,16 +46,19 @@ const Question = props => {
           button={previousButton}
           disabled={currentQuestion === 0}
         />
-        <img
-          className="question_main_image"
-          src={
-            question.attachment && question.attachment.url
-              ? question.attachment.url
-              : "https://www.bernardsqualitycars.com/dist/img/nophoto.jpg"
-          }
-          alt=""
-        />
+        <div className="question_main_image_wrapper">
+          <img
+            className="question_main_image_zoom"
+            src={
+              question.attachment && question.attachment.url
+                ? question.attachment.url
+                : "https://www.bernardsqualitycars.com/dist/img/nophoto.jpg"
+            }
+            alt=""
+          />
+        </div>
         <div className="question_main_data">
+          <CountDown />
           <p className="question_main_number">Question {currentQuestion + 1}</p>
           <p className="question_main_text">{question.question}</p>
           <input

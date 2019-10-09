@@ -15,13 +15,26 @@
         align-items: center
         padding: 20px
         width: 100%
-        .question_main_image
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 300px
-            width: 50%
-            border-radius: 3%
+        .question_main_image_wrapper
+            display : flex
+            align-items: center
+            justify-content: center
+            overflow: hidden
+            height: 400px
+            width: 700px
+            .question_main_image_zoom
+                display: cover;
+                align-items: center;
+                justify-content: center;
+                height: 400px
+                width: 700px
+                border-radius: 16px
+                transition: transform 1.5s, filter 2s ease-in-out;
+                filter: grayscale(100%);
+                &:hover
+                    filter: grayscale(0);
+                    transform: scale(1.05);
+
         .question_main_data
             display: flex
             justify-content: space-between

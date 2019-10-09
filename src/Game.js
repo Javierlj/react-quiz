@@ -7,7 +7,6 @@ import { Spinner } from "react-bootstrap";
 
 import Question from "./components/Question/Question";
 import Buttons from "./components/Buttons/Buttons";
-import CountDown from "./components/CountDown/CountDown";
 
 import { questionAnswer } from "./redux/actions";
 import { getQuestions } from "./services/apiCalls";
@@ -15,12 +14,14 @@ import { getQuestions } from "./services/apiCalls";
 import "./Game.sass";
 
 const Game = props => {
-  const {dispatch,
+  const {
+    dispatch,
     questions,
     currentQuestion,
     history,
     finished,
-    loading} = props;
+    loading
+  } = props;
 
   const onQuestionAnswer = answer => {
     dispatch(questionAnswer(currentQuestion, answer));
@@ -45,7 +46,6 @@ const Game = props => {
   ) : (
     <div>
       <div className="game">
-        <CountDown />
         <Question
           question={questions[currentQuestion]}
           onQuestionAnswer={answer => onQuestionAnswer(answer)}

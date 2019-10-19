@@ -41,7 +41,16 @@ const Results = props => {
             <tr>
               <td>{index + 1}</td>
               <td>{question.question}</td>
-              <td>{question.answer}</td>
+              <td>
+                {question.answer === question.userAnswer ? (
+                  <p style={{ color: "green" }}>{question.userAnswer}</p>
+                ) : (
+                  <p>
+                    <del style={{ color: "red" }}>{question.userAnswer}</del>
+                    {question.answer}
+                  </p>
+                )}
+              </td>
             </tr>
           ))}
         </tbody>

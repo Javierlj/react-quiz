@@ -8,7 +8,7 @@ import Indicator from "./Indicator";
 import { changeQuestion } from "../../redux/actions";
 
 const Indicators = props => {
-  const { length, dispatch, currentQuestion } = props;
+  const { length, dispatch, currentQuestion, questions } = props;
   const handleNumberSelected = number => {
     dispatch(changeQuestion(number));
   };
@@ -19,7 +19,9 @@ const Indicators = props => {
           <Indicator
             number={el}
             onNumberSelect={number => handleNumberSelected(number)}
-            active={currentQuestion === el}
+            answered={questions[el].userAnswer}
+            active={el === currentQuestion}
+            current
             key={el}
           />
         );
@@ -31,7 +33,8 @@ const Indicators = props => {
 Indicators.propTypes = {
   length: PropTypes.number.isRequired,
   dispatch: PropTypes.func.isRequired,
-  currentQuestion: PropTypes.number.isRequired
+  currentQuestion: PropTypes.number.isRequired,
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 function mapStateToProps(state) {

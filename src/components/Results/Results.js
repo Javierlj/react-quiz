@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { Table } from "react-bootstrap";
+import stylePropType from "react-style-proptype";
 
 import "./results.sass";
 import CustomButton from "../Buttons/Button";
@@ -66,9 +67,8 @@ const Results = props => {
 Results.propTypes = {
   history: PropTypes.any.isRequired,
   score: PropTypes.number.isRequired,
-  history: PropTypes.any.isRequired,
   dispatch: PropTypes.func.isRequired,
-  style: stylePropType,
+  style: stylePropType.isRequired,
   questions: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 

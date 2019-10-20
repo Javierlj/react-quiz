@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 
 import React, { Component } from "react";
 import GlobalState from "./reducers";
@@ -29,9 +29,9 @@ export default class ReduxProvider extends Component {
   render() {
     return (
       <Provider store={this.store}>
-        <BrowserRouter>
+        <HashRouter>
           <App />
-        </BrowserRouter>
+        </HashRouter>
       </Provider>
     );
   }

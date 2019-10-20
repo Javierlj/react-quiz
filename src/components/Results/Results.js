@@ -2,28 +2,19 @@ import React from "react";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { Table } from "react-bootstrap";
+import Button from "../../styles/Button";
 
 import "./results.sass";
 import CustomButton from "../Buttons/Button";
 import { resetQuestions } from "../../services/apiCalls";
 
 const Results = props => {
-  const { history, questions, score, dispatch } = props;
-
-  const buttonStyle = {
-    background: "transparent",
-    fontSize: "16px",
-    borderRadius: "3px",
-    color: "palevioletred",
-    border: "2px solid palevioletred",
-    margin: "0 1em",
-    padding: " 0.25em 1em"
-  };
+  const { history, questions, score, dispatch, style } = props;
 
   const backButton = {
     name: "Go Back",
     buttonFunction: () => resetQuestions(dispatch) && history.push("/"),
-    style: buttonStyle
+    style: style
   };
 
   return (
@@ -56,7 +47,9 @@ const Results = props => {
         </tbody>
       </Table>
       <div className="table_score">
-        <td colSpan="3">Your Score is: {score}</td>
+        <td colSpan="3" style={{ fontSize: 24 }}>
+          <b>Your Score is: {score}/10</b>
+        </td>
         <CustomButton button={backButton} />
       </div>
     </div>

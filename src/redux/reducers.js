@@ -27,6 +27,8 @@ function finished(state = false, action = {}) {
       return true;
     case RESET:
       return false;
+    case INIT_QUESTIONS:
+      return false;
     default:
       return state;
   }

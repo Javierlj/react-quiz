@@ -13,8 +13,11 @@ const Results = props => {
 
   const backButton = {
     name: "Go Back",
-    buttonFunction: () => resetQuestions(dispatch) && history.push("/"),
-    style: style
+    buttonFunction: async () => {
+      await resetQuestions(dispatch);
+      history.push("/");
+    },
+    style
   };
 
   return (
@@ -48,7 +51,12 @@ const Results = props => {
       </Table>
       <div className="table_score">
         <td colSpan="3" style={{ fontSize: 24 }}>
-          <b>Your Score is: {score}/10</b>
+          <b>
+            Your Score is: 
+{' '}
+{score}
+            /10
+          </b>
         </td>
         <CustomButton button={backButton} />
       </div>
